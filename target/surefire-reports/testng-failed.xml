@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Failed suite [Suite]">
+  <test name="Test(failed)">
+    <classes>
+      <class name="Search.HappyPath">
+        <methods>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+          <include name="testSearchExist"/>
+          <include name="testSearchdDontExist"/>
+        </methods>
+      </class> <!-- Search.HappyPath -->
+      <class name="FacebookLogin.HappyPath">
+        <methods>
+          <include name="beforeClass"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- FacebookLogin.HappyPath -->
+      <class name="ProductDescriptionPage.HappyPath">
+        <methods>
+          <include name="MultiImagesIfExists"/>
+          <include name="PDPElementsExists"/>
+          <include name="QauntityButton"/>
+          <include name="tearDown"/>
+          <include name="Favorites"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- ProductDescriptionPage.HappyPath -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->
