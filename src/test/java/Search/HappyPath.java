@@ -33,11 +33,11 @@ public class HappyPath {
 		baseUrl = "https://www.mamasandpapas.ae/";
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
-		report = new ExtentReports("test-output/SearchReport.html", true);
+		//report = new ExtentReports("test-output/SearchReport.html", true);
 		
 		driver.get(baseUrl + "/");
 		
-		TakeScreenShot ("siteloaded");
+		//TakeScreenShot ("siteloaded");
 		
 		if (isAlertPresent()) {
 			closeAlertAndGetItsText();
@@ -46,12 +46,12 @@ public class HappyPath {
 		if (isElementPresent(By.cssSelector("#onesignal-popover-container"))) {
 
 			driver.findElement(By.cssSelector("#onesignal-popover-cancel-button")).click();
-		}
+		}     
+		
 
-		if (isElementPresent(By.cssSelector("#campaign-modal > div:nth-child(1) > div:nth-child(1)"))) {
-
+		if (isElementPresent(By.cssSelector("#campaign-modal"))) {
 			driver.findElement(By.cssSelector(
-					"#campaign-modal > div.vertical-alignment-helper > div.modal-dialog.vertical-align-center > div.modal-content > div.modal-header > button.close"))
+					"#campaign-modal > div > div > div > div.modal-header > button"))
 					.click();
 		}
 	}
@@ -115,18 +115,18 @@ public class HappyPath {
 	private void TakeScreenShot (String name) {
 		
 		test.log(LogStatus.INFO, "Taking Screenshot");
-		//File screenShot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		//try {
-		//	FileUtils.copyFile(screenShot, new File("screenshots/" + name + ".png"));
-		//} catch (IOException e) {
+		File screenShot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(screenShot, new File("screenshots/" + name + ".png"));
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
+			e.printStackTrace();
+		}
 	}
 
 	@AfterClass(alwaysRun = true)
 	public void tearDown() throws Exception {
-		driver.quit();
+		//driver.quit();
 		report.endTest(test);
 		report.flush();
 		

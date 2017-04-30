@@ -3,13 +3,14 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="FacebookLogin.HappyPath">
+      <class name="Search.HappyPath">
         <methods>
-          <include name="beforeClass"/>
-          <include name="testLogin"/>
-          <include name="afterClass"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+          <include name="testSearchExist"/>
+          <include name="testSearchdDontExist"/>
         </methods>
-      </class> <!-- FacebookLogin.HappyPath -->
+      </class> <!-- Search.HappyPath -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

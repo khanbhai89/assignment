@@ -35,7 +35,7 @@ public class HappyPath {
 
 	@AfterClass
 	public void afterClass() {
-		driver.quit();
+		//driver.quit();
 		report.endTest(test);
 		report.flush();
 		
