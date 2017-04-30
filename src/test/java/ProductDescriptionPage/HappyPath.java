@@ -133,7 +133,7 @@ public class HappyPath {
 	}
 	
 	@Test
-	public void QauntityButton() throws IOException {
+	public void QauntityButton(){
 		
 		driver.get(baseUrl + "/capella-bouncer-catch-a-star-208904313.html");
 		
@@ -185,13 +185,13 @@ public class HappyPath {
 	private void TakeScreenShot (String name) {
 		
 		test.log(LogStatus.INFO, "Taking Screenshot");
-		File screenShot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(screenShot, new File("screenshots/" + name + ".png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//File screenShot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		//try {
+		//	FileUtils.copyFile(screenShot, new File("screenshots/" + name + ".png"));
+		//} catch (IOException e) {
+		//	// TODO Auto-generated catch block
+		//	e.printStackTrace();
+		//}
 	}
 	
 	private String ReturnClass (String xPath) {
