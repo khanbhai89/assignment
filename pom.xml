@@ -25,7 +25,12 @@
        		<groupId>com.relevantcodes</groupId>
        		<artifactId>extentreports</artifactId>
        		<version>2.40.2</version>
-       	</dependency>		
+       	</dependency>
+       	<dependency>
+  			<groupId>org.json</groupId>
+  			<artifactId>json</artifactId>
+  			<version>20160810</version>
+		</dependency>		
 	</dependencies>
 	<build>
 		<plugins>
