@@ -31,14 +31,48 @@ div.shootout {padding:2em;border:3px #4854A8 solid}
 <body>
 <table cellspacing="0" cellpadding="0" class="result">
 <tr><th>Test</th><th class="numi">Methods<br/>Passed</th><th class="numi">Scenarios<br/>Passed</th><th class="numi"># skipped</th><th class="numi"># failed</th><th class="numi">Total<br/>Time</th><th class="numi">Included<br/>Groups</th><th class="numi">Excluded<br/>Groups</th></tr>
-<tr><td style="text-align:left;padding-right:2em">Default test</td><td class="numi">1</td><td class="numi">1</td><td class="numi">0</td><td class="numi">0</td><td class="numi">58.2 seconds</td><td class="numi"></td><td class="numi"></td></tr>
+<tr><td style="text-align:left;padding-right:2em">Test</td><td class="numi">5</td><td class="numi">5</td><td class="numi">0</td><td class="numi_attn">2</td><td class="numi">192.1 seconds</td><td class="numi"></td><td class="numi"></td></tr>
 </table>
 <table cellspacing="0" cellpadding="0" class="passed" id="summary">
 <tr><th>Class</th><th>Method</th><th># of<br/>Scenarios</th><th>Start</th><th>Time<br/>(ms)</th></tr>
-<tr><th colspan="4">Default test &#8212; passed</th></tr>
-<tr class="passedodd"><td rowspan="1">FacebookLogin.HappyPath</td><td><a href="#m1"><b>testLogin</b>  </a></td><td class="numi">1</td><td>1494194364870</td><td class="numi">20792</td></tr>
+<tr><th colspan="4">Test &#8212; failed</th></tr>
+<tr class="failedodd"><td rowspan="2">ProductDescriptionPage.HappyPath</td><td><a href="#m1"><b>favorites</b>  </a></td><td class="numi">1</td><td>1494196537575</td><td class="numi">2673</td></tr><tr class="failedodd"><td><a href="#m2"><b>qauntityButton</b>  </a></td><td class="numi">1</td><td>1494196542436</td><td class="numi">33185</td></tr>
+<tr><th colspan="4">Test &#8212; passed</th></tr>
+<tr class="passedodd"><td rowspan="2">ProductDescriptionPage.HappyPath</td><td><a href="#m3"><b>PDPElementsExists</b>  </a></td><td class="numi">1</td><td>1494196529286</td><td class="numi">8288</td></tr><tr class="passedodd"><td><a href="#m4"><b>multiImagesIfExists</b>  </a></td><td class="numi">1</td><td>1494196540250</td><td class="numi">2185</td></tr>
+<tr class="passedeven"><td rowspan="1">FacebookLogin.HappyPath</td><td><a href="#m5"><b>testLogin</b>  </a></td><td class="numi">1</td><td>1494196424315</td><td class="numi">19536</td></tr>
+<tr class="passedodd"><td rowspan="2">Search.HappyPath</td><td><a href="#m6"><b>testSearchExist</b>  </a></td><td class="numi">1</td><td>1494196481332</td><td class="numi">7740</td></tr><tr class="passedodd"><td><a href="#m7"><b>testSearchdDontExist</b>  </a></td><td class="numi">1</td><td>1494196489073</td><td class="numi">3604</td></tr>
 </table>
-<h1>Default test</h1>
-<h2 id="m1">FacebookLogin.HappyPath:testLogin</h2>
+<h1>Test</h1>
+<h2 id="m1">ProductDescriptionPage.HappyPath:qauntityButton</h2>
+<div style="padding-left:3em">
+<p>expected [true] but found [false]</p>
+org.testng.Assert.fail(Assert.java:94)
+<br/>at org.testng.Assert.failNotEquals(Assert.java:494)
+<br/>at org.testng.Assert.assertTrue(Assert.java:42)
+<br/>at org.testng.Assert.assertTrue(Assert.java:52)
+<br/>at ProductDescriptionPage.HappyPath.qauntityButton(HappyPath.java:156)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m2">ProductDescriptionPage.HappyPath:favorites</h2>
+<div style="padding-left:3em">
+<p>expected [true] but found [false]</p>
+org.testng.Assert.fail(Assert.java:94)
+<br/>at org.testng.Assert.failNotEquals(Assert.java:494)
+<br/>at org.testng.Assert.assertTrue(Assert.java:42)
+<br/>at org.testng.Assert.assertTrue(Assert.java:52)
+<br/>at ProductDescriptionPage.HappyPath.favorites(HappyPath.java:184)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m3">FacebookLogin.HappyPath:testLogin</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m4">Search.HappyPath:testSearchdDontExist</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m5">ProductDescriptionPage.HappyPath:multiImagesIfExists</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m6">ProductDescriptionPage.HappyPath:PDPElementsExists</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m7">Search.HappyPath:testSearchExist</h2>
 <p class="totop"><a href="#summary">back to summary</a></p>
 </body></html>

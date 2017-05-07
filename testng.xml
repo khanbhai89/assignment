@@ -6,7 +6,9 @@
       <class name="FacebookLogin.HappyPath"/>
       <class name="Search.HappyPath"/>
       <class name="ProductDescriptionPage.HappyPath"/>
+      <!--
       <class name="APITesting.HappyPath"/>
+      -->
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

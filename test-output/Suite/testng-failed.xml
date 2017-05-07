@@ -5,22 +5,22 @@
     <classes>
       <class name="Search.HappyPath">
         <methods>
-          <include name="testSearchExist"/>
-          <include name="testSearchdDontExist"/>
+          <include name="afterClass"/>
+          <include name="beforeClass"/>
         </methods>
       </class> <!-- Search.HappyPath -->
       <class name="FacebookLogin.HappyPath">
         <methods>
-          <include name="testLogin"/>
+          <include name="afterClass"/>
           <include name="beforeClass"/>
         </methods>
       </class> <!-- FacebookLogin.HappyPath -->
       <class name="ProductDescriptionPage.HappyPath">
         <methods>
-          <include name="PDPElementsExists"/>
           <include name="favorites"/>
-          <include name="multiImagesIfExists"/>
+          <include name="afterClass"/>
           <include name="qauntityButton"/>
+          <include name="beforeClass"/>
         </methods>
       </class> <!-- ProductDescriptionPage.HappyPath -->
     </classes>
