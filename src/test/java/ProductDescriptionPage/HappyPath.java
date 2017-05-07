@@ -1,102 +1,67 @@
 package ProductDescriptionPage;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-import org.testng.annotations.BeforeClass;
 import org.testng.Assert;
-import org.apache.commons.io.FileUtils;
 import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-public class HappyPath {
-	private WebDriver driver;
-	private String baseUrl;
-	private String searhText;
-	private boolean acceptNextAlert = true;
-	private StringBuffer verificationErrors = new StringBuffer();
-	private ExtentReports report;
-	private ExtentTest test;
+import commonConfig.Config;
 
-	@BeforeClass(alwaysRun = true)
-	public void setUp() throws Exception {
-		driver = new ChromeDriver();
-		baseUrl = "https://www.mamasandpapas.ae/";
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
-		report = new ExtentReports("test-output/PDPReport.html", true);
-		
-		driver.get(baseUrl + "/");
-
-		if (isAlertPresent()) {
-			closeAlertAndGetItsText();
-		}
-
-		if (isElementPresent(By.cssSelector("#onesignal-popover-container"))) {
-
-
-			driver.findElement(By.cssSelector("#onesignal-popover-cancel-button")).click();
-		}
-
-		if (isElementPresent(By.cssSelector("#campaign-modal > div:nth-child(1) > div:nth-child(1)"))) {
-
-			driver.findElement(By.cssSelector(
-					"#campaign-modal > div.vertical-alignment-helper > div.modal-dialog.vertical-align-center > div.modal-content > div.modal-header > button.close"))
-					.click();
-		}
-	}
+public class HappyPath extends Config {
 
 	@Test
 	public void PDPElementsExists() {
-		TakeScreenShot ("siteloaded");
-		searhText = "Capella Bouncer";
-
-		driver.findElement(By.name("q")).clear();
-		driver.findElement(By.name("q")).sendKeys(searhText);
-
-		WebDriverWait wait = new WebDriverWait(driver, 40);
-		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.show-all")));
-
-
-		driver.findElement(By.name("q")).clear();
-		driver.findElement(By.name("q")).sendKeys(searhText);
-		driver.findElement(By.cssSelector("button.show-all")).click();
-		driver.findElement(
-				By.xpath("/html/body/div[2]/div[3]/div[1]/div/section/div/div[3]/div[1]/a/figure/div/div/img")).click();
-
-		Assert.assertTrue(isElementPresent(By.cssSelector("div.title-and-price-wrapper > h1")));
-		Assert.assertTrue(
-				isElementPresent(By.cssSelector("div.add-to-cart-and-quantity > div.quantity-wrapper.clearfix > div")));
-
-		String ClassName = driver.findElement(By.cssSelector("div.slider:nth-child(1)")).getAttribute("class");
-		String MultiImageClassName = "slider slider-nav thumbnails  slick-initialized slick-slider slick-vertical";
 		
-		if (ClassName.equals(MultiImageClassName)) {
+		report = new ExtentReports("test-output/PDPReport.html", true);
+		test = report.startTest("PDP Elements Exists");
+		//TakeScreenShot ("siteloaded");
+		driver.get(baseUrl + "/capella-bouncer-catch-a-star-208904313.html");
+
+		Assert.assertTrue(isElementPresent(By.cssSelector(conf.getString("titleClass"))));
+		
+		if (isElementPresent(By.cssSelector(conf.getString("titleClass")))) {
+			
+			test.log(LogStatus.PASS, "Title exists on PDP.");
+		}
+		else {
+			
+			test.log(LogStatus.FAIL, "Title doesn't exists on PDP.");
+		}
+		
+		Assert.assertTrue(
+				isElementPresent(By.cssSelector(conf.getString("favoriteButton"))));
+		
+		if (isElementPresent(By.cssSelector(conf.getString("favoriteButton")))) {
+			
+			test.log(LogStatus.PASS, "Favorite button exists on PDP.");
+		}
+		else {
+			
+			test.log(LogStatus.FAIL, "Favorite button doesn't exists on PDP.");
+		}
+		
+		if (conf.getString("multipleImagesClass").equals(returnClass ("div.slider:nth-child(1)"))) {
 
 			Assert.assertTrue(isElementPresent(
-					By.cssSelector("div.product-images.col-md-7 > div.product-images-wrapper.easyzoom-wrapper")));
+					By.cssSelector(conf.getString("multipleImages"))));
 
 			if (isElementPresent(
-					By.cssSelector("div.product-images.col-md-7 > div.product-images-wrapper.easyzoom-wrapper"))) {
+					By.cssSelector(conf.getString("multipleImages")))) {
 				
-				 Assert.assertTrue(isElementPresent(By.cssSelector("figure.slick-current:nth-child(2) > a:nth-child(1) > img:nth-child(1)")));
+				test.log(LogStatus.PASS, "Multiple Images are displayed.");
+				Assert.assertTrue(isElementPresent(By.cssSelector("figure.slick-current:nth-child(2) > a:nth-child(1) > img:nth-child(1)")));
 			}
 
 		} else {
 			
 			Assert.assertTrue(isElementPresent(By
-					.cssSelector("div.product-images.col-md-7 > div.product-images-wrapper.easyzoom-wrapper.expand")));
+					.cssSelector(conf.getString("singleImages"))));
 
 			if (isElementPresent(By
-					.cssSelector("div.product-images.col-md-7 > div.product-images-wrapper.easyzoom-wrapper.expand"))) {
-
+					.cssSelector(conf.getString("singleImages")))) {
+				
+				test.log(LogStatus.PASS, "Single Image is displayed.");
 				Assert.assertTrue(isElementPresent(By.cssSelector(
 						"div.slider:nth-child(5) > div:nth-child(1) > div:nth-child(1) > figure:nth-child(1) > a:nth-child(1) > img:nth-child(1)")));
 			}
@@ -104,22 +69,44 @@ public class HappyPath {
 
 		Assert.assertTrue(isElementPresent(
 				By.cssSelector("div.product-info.col-md-5 > div.action-buttons.row > div > button > span")));
+		
+		report.endTest(test);
 
 	}
 	
 	@Test
-	public void MultiImagesIfExists() throws IOException {
+	public void multiImagesIfExists() {
 		
 		driver.get(baseUrl + "/capella-bouncer-catch-a-star-208904313.html");
-
-		String ClassName = driver.findElement(By.cssSelector("div.slider:nth-child(1)")).getAttribute("class");
-		String MultiImageClassName = "slider slider-nav thumbnails  slick-initialized slick-slider slick-vertical";
 		
-		if (ClassName.equals(MultiImageClassName)) {
+		test = report.startTest("Multi Images Exists");
+		
+		if (conf.getString("multipleImagesClass").equals(returnClass ("div.slider:nth-child(1)"))) {
 
 			Assert.assertTrue(imagesAreSame());
+			
+			if (imagesAreSame()) {
+				
+				test.log(LogStatus.PASS, "Correct Image is selected.");
+			}
+			else {
+				
+				test.log(LogStatus.FAIL, "Correct Image is not selected.");
+			}
+			
+			test.log(LogStatus.INFO, "Slider image is changed.");
 			driver.findElement(By.xpath("//figure[3]/a/img")).click();
 			Assert.assertTrue(imagesAreSame());
+			
+			if (imagesAreSame()) {
+				
+				test.log(LogStatus.PASS, "Correct Image is selected.");
+			}
+			else {
+				
+				test.log(LogStatus.FAIL, "Correct Image is not selected.");
+			}
+			
 		   // driver.findElement(By.xpath("//figure/a/img")).click();
 		   // Assert.assertTrue(imagesAreSame());
 		   // driver.findElement(By.xpath("//figure[2]/a/img")).click();
@@ -130,15 +117,29 @@ public class HappyPath {
 		   // Assert.assertTrue(imagesAreSame());
 		} 
 		
+		report.endTest(test);
+		
 	}
 	
 	@Test
-	public void QauntityButton() throws IOException {
+	public void qauntityButton(){
 		
 		driver.get(baseUrl + "/capella-bouncer-catch-a-star-208904313.html");
 		
+		test = report.startTest("Quantity Button Check.");
+		
 		if (quantityNumber () <= 1) {
 			Assert.assertTrue(isElementPresent(By.cssSelector("a.decrease.disabled")));
+			
+			if (isElementPresent(By.cssSelector("a.decrease.disabled"))) {
+				
+				test.log(LogStatus.PASS, "Decrease button is disabled on 1.");
+			}
+			else {
+				
+				test.log(LogStatus.FAIL, "Decrease button is enabled on 1.");
+			}
+			
 		}
 			
 		driver.findElement(By.cssSelector("a.increase")).click();
@@ -153,50 +154,70 @@ public class HappyPath {
 	    
 	    if (quantityNumber () >= 10) {
 			Assert.assertTrue(isElementPresent(By.cssSelector("a.increase.disabled")));
+			
+			if (isElementPresent(By.cssSelector("a.decrease.disabled"))) {
+				
+				test.log(LogStatus.PASS, "Increase button is disabled on 1.");
+			}
+			else {
+				
+				test.log(LogStatus.FAIL, "Increase button is enabled on 1.");
+			}
 		}
+	    
+	    report.endTest(test);
 	}
 	
 	@Test
-	public void Favorites () throws IOException {
+	public void favorites () {
 		
 		driver.get(baseUrl + "/capella-bouncer-catch-a-star-208904313.html");
 		
-		String LoginBoxDisplayed = "container-fluid modal fade in";
-		String FavoritedButton = "btn btn-empty toggle-favorites favorited";
+		test = report.startTest("Favorite Button Check.");
+		
+		String loginBoxDisplayed = "container-fluid modal fade in";
+		String favoritedButton = "btn btn-empty toggle-favorites favorited";
 		
 		if(isElementPresent(By.cssSelector("#welcome-and-cart > a.login-button"))) {
 			
-			driver.findElement(By.cssSelector("div.action-buttons.row > div > button.btn.btn-empty.toggle-favorites > span")).click();
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			Assert.assertTrue(LoginBoxDisplayed.equals(ReturnClass ("//*[@id=\"login-modal\"]")));
-			Assert.assertFalse(FavoritedButton.equals(ReturnClass ("/html/body/div[2]/div[3]/div[2]/div[2]/div[3]/div/button")));
+			driver.findElement(By.cssSelector(conf.getString("favoriteButton"))).click();
+			Assert.assertTrue(loginBoxDisplayed.equals(returnClass ("#login-modal")));
+			Assert.assertFalse(favoritedButton.equals(returnClass (conf.getString("favoriteButton"))));
+			
+			if (loginBoxDisplayed.equals(returnClass ("#login-modal"))) {
+				
+				test.log(LogStatus.PASS, "Login form is opened when user is not registered.");
+			}
+			else {
+				
+				test.log(LogStatus.FAIL, "Login form is not opened when user is not registered.");
+			}
+			
 		}
-		
+
 		if (isElementPresent(By.cssSelector("#user-info-box"))) {
 			
-			driver.findElement(By.cssSelector("div.action-buttons.row > div > button.btn.btn-empty.toggle-favorites > span")).click();
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			Assert.assertFalse(LoginBoxDisplayed.equals(ReturnClass ("//*[@id=\"login-modal\"]")));
-			Assert.assertTrue(FavoritedButton.equals(ReturnClass ("/html/body/div[2]/div[3]/div[2]/div[2]/div[3]/div/button")));
-		}
-		
-	}
-	
-	private void TakeScreenShot (String name) {
-		
-		test.log(LogStatus.INFO, "Taking Screenshot");
-		File screenShot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(screenShot, new File("screenshots/" + name + ".png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	private String ReturnClass (String xPath) {
+			driver.findElement(By.cssSelector(conf.getString("favoriteButton"))).click();
+			Assert.assertFalse(loginBoxDisplayed.equals(returnClass ("#login-modal")));
+			Assert.assertTrue(favoritedButton.equals(returnClass (conf.getString("favoriteButton"))));
+			
+			if (favoritedButton.equals(returnClass (conf.getString("favoriteButton")))) {
 				
-		return driver.findElement(By.xpath(xPath)).getAttribute("class");
+				test.log(LogStatus.PASS, "Favorite Button is enabled.");
+			}
+			else {
+				
+				test.log(LogStatus.FAIL, "Favorite Button is disabled.");
+			}
+		}
+		
+		report.endTest(test);
+		
+	}
+	
+	private String returnClass (String CSSSelector) {
+				
+		return driver.findElement(By.cssSelector(CSSSelector)).getAttribute("class");
 	}
 	
 	private int quantityNumber () {
@@ -221,48 +242,5 @@ public class HappyPath {
 		return false;
 	}
 
-	@AfterClass(alwaysRun = true)
-	public void tearDown() throws Exception {
-		driver.quit();
-		report.endTest(test);
-		report.flush();
-		
-		String verificationErrorString = verificationErrors.toString();
-		if (!"".equals(verificationErrorString)) {
-			Assert.fail(verificationErrorString);
-		}
-	}
-
-	private boolean isElementPresent(By by) {
-		try {
-			driver.findElement(by);
-			return true;
-		} catch (NoSuchElementException e) {
-			return false;
-		}
-	}
-
-	private boolean isAlertPresent() {
-		try {
-			driver.switchTo().alert();
-			return true;
-		} catch (NoAlertPresentException e) {
-			return false;
-		}
-	}
-
-	private String closeAlertAndGetItsText() {
-		try {
-			Alert alert = driver.switchTo().alert();
-			String alertText = alert.getText();
-			if (acceptNextAlert) {
-				alert.accept();
-			} else {
-				alert.dismiss();
-			}
-			return alertText;
-		} finally {
-			acceptNextAlert = true;
-		}
-	}
+	
 }
