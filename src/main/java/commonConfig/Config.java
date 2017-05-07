@@ -91,14 +91,14 @@ public class Config {
 	
 	public void takeScreenShot (String name) {
 		
-		test.log(LogStatus.INFO, "Taking Screenshot");
-		File screenShot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		try {
-			FileUtils.copyFile(screenShot, new File("screenshots/" + name + ".png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		test.log(LogStatus.INFO, "Taking Screenshot");
+//		File screenShot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+//		try {
+//			FileUtils.copyFile(screenShot, new File("screenshots/" + name + ".png"));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	public boolean isElementPresent(By by) {
