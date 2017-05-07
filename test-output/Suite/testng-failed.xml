@@ -3,13 +3,26 @@
 <suite name="Failed suite [Suite]">
   <test name="Test(failed)">
     <classes>
+      <class name="Search.HappyPath">
+        <methods>
+          <include name="testSearchExist"/>
+          <include name="testSearchdDontExist"/>
+        </methods>
+      </class> <!-- Search.HappyPath -->
       <class name="FacebookLogin.HappyPath">
         <methods>
-          <include name="beforeClass"/>
           <include name="testLogin"/>
-          <include name="afterClass"/>
+          <include name="beforeClass"/>
         </methods>
       </class> <!-- FacebookLogin.HappyPath -->
+      <class name="ProductDescriptionPage.HappyPath">
+        <methods>
+          <include name="PDPElementsExists"/>
+          <include name="favorites"/>
+          <include name="multiImagesIfExists"/>
+          <include name="qauntityButton"/>
+        </methods>
+      </class> <!-- ProductDescriptionPage.HappyPath -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
