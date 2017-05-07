@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite">
-  <test name="Test">
+<suite name="Suite" parallel="tests">
+  <test name="Chrome test">
+  <parameter name="browser" value="chrome" />
+    <classes>
+      <class name="FacebookLogin.HappyPath"/>
+      <class name="Search.HappyPath"/>
+      <class name="ProductDescriptionPage.HappyPath"/>
+      <!--
+      <class name="APITesting.HappyPath"/>
+      -->
+    </classes>
+  </test> <!-- Test -->
+  <test name="Firefix test">
+  <parameter name="browser" value="firefox" />
     <classes>
       <class name="FacebookLogin.HappyPath"/>
       <class name="Search.HappyPath"/>

@@ -16,10 +16,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -35,8 +37,10 @@ public class Config {
 	public String searhText;
 	public PropertiesConfiguration conf=null;
 	
+	@Parameters("browser")
+	
 	@BeforeClass
-	public void beforeClass() {
+	public void beforeClass( String browser) {
 				
 		try {
 			conf=new PropertiesConfiguration("src/main/java/commonConfig/cssClasses.properties");
@@ -44,10 +48,19 @@ public class Config {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		 
+		if (browser.equalsIgnoreCase("firefox")) {
+			 
+			  driver = new FirefoxDriver();  
+		 
+		 }
+		else if (browser.equalsIgnoreCase("chrome")) {
 
-		ChromeOptions chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments("--kiosk");
-		driver = new ChromeDriver(chromeOptions);
+			ChromeOptions chromeOptions = new ChromeOptions();
+			chromeOptions.addArguments("--kiosk");
+			driver = new ChromeDriver(chromeOptions);
+		}
+		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		baseUrl = "https://www.mamasandpapas.ae";		
 		driver.get(baseUrl + "/");
